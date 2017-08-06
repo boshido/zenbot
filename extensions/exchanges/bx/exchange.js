@@ -15,17 +15,24 @@ module.exports = function container(get, set, clear) {
   var s = {options: minimist(process.argv)}
   var so = s.options
 
-  var client
+  var public_client, authed_client
   var silencedRecoverableErrors = new RegExp(/(ESOCKETTIMEDOUT|ETIMEDOUT)/)
   var shownWarning = false
-  function getClient() {
-    if (!client) {
+  function publicClient () {
+    if (!public_client) {
+      public_client = new BXClient()
+    }
+    return public_client
+  }
+
+  function authedClient () {
+    if (!authed_client) {
       if (!c.bx || !c.bx.key || c.bx.key === 'YOUR-API-KEY') {
         throw new Error('please configure your BX credentials in conf.js')
       }
-      client = new BXClient(c.bx.key,c.bx.secret)
+      authed_client = new BXClient(c.bx.key, c.bx.secret)
     }
-    return client
+    return authed_client
   }
 
   function retry(method, args, error) {
@@ -39,7 +46,7 @@ module.exports = function container(get, set, clear) {
     // silence common timeout errors
     if (so.debug || !error.message.match(silencedRecoverableErrors)) {
       if (error.message.match(/between Cloudflare and the origin web server/)) {
-        errorMsg = 'Connection between Cloudflare CDN and api.kraken.com failed'
+        errorMsg = 'Connection between Cloudflare CDN and bx.in.th/api failed'
       } else {
         errorMsg = error
       }
@@ -65,7 +72,7 @@ module.exports = function container(get, set, clear) {
     },
     getTrades: function (opts, cb) {
       var func_args = [].slice.call(arguments)
-      var client = getClient()
+      var client = publicClient()
       var product = getProductByProductId(opts.product_id)
       if (!product) {
         return cb('Could not find product from opts.product_id')
@@ -87,11 +94,6 @@ module.exports = function container(get, set, clear) {
           }
           let trades = result.trades.trades
           trades = trades.map(function (trade) {
-            console.log({trade_id: trade.trade_id,
-              time: moment(trade.trade_date, 'YYYY-MM-DD HH:mm:ss').valueOf(),
-              size: parseFloat(trade.amount),
-              price: parseFloat(trade.rate),
-              side: trade.trade_type})
             return {
               trade_id: trade.trade_id,
               time: moment(trade.trade_date, 'YYYY-MM-DD HH:mm:ss').valueOf(),
@@ -106,7 +108,7 @@ module.exports = function container(get, set, clear) {
 
     getBalance: function (opts, cb) {
       var args = [].slice.call(arguments)
-      let client = getClient()
+      let client = authedClient()
       client.getBalance()
         .then(function (result) {
           var balance = {
@@ -136,7 +138,7 @@ module.exports = function container(get, set, clear) {
 
     getQuote: function (opts, cb) {
       var args = [].slice.call(arguments)
-      var client = getClient()
+      var client = publicClient()
       var pair = opts.product.id
       client.getTicker()
         .then(function (result) {
@@ -158,7 +160,7 @@ module.exports = function container(get, set, clear) {
 
     cancelOrder: function (opts, cb) {
       var args = [].slice.call(arguments)
-      var client = getClient()
+      var client = authedClient()
       var product = getProductByProductId(opts.product_id)
       client.cancelOrder({order_id: opts.order_id, pairing: product.id})
         .then(function (result) {
@@ -180,7 +182,7 @@ module.exports = function container(get, set, clear) {
 
     trade: function (type, opts, cb) {
       var args = [].slice.call(arguments)
-      var client = getClient()
+      var client = authedClient()
       var product = getProductByProductId(opts.product_id)
       var params = {
         pairing: product.id,
@@ -263,7 +265,7 @@ module.exports = function container(get, set, clear) {
       var args = [].slice.call(arguments)
       var order = orders['~' + opts.order_id]
       if (!order) return cb(new Error('order not found in cache'))
-      var client = getClient()
+      var client = authedClient()
       var product = getProductByProductId(opts.product_id)
 
       var params = {
