@@ -21,7 +21,7 @@ module.exports = function container(get, set, clear) {
   function getClient() {
     if (!client) {
       if (!c.bx || !c.bx.key || c.bx.key === 'YOUR-API-KEY') {
-        throw new Error('please configure your Kraken credentials in conf.js')
+        throw new Error('please configure your BX credentials in conf.js')
       }
       client = new BXClient(c.bx.key,c.bx.secret)
     }
@@ -43,7 +43,7 @@ module.exports = function container(get, set, clear) {
       } else {
         errorMsg = error
       }
-      console.warn(('\nKraken API warning - unable to call ' + method + ' (' + errorMsg + '), retrying in ' + timeout / 1000 + 's').yellow)
+      console.warn(('\nBX API warning - unable to call ' + method + ' (' + errorMsg + '), retrying in ' + timeout / 1000 + 's').yellow)
     }
     setTimeout(function () {
       exchange[method].apply(exchange, args)
