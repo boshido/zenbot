@@ -1,0 +1,162 @@
+[
+  {
+    "id": "1",
+    "asset": "BTC",
+    "currency": "THB",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "BTC/THB"
+  },
+  {
+    "id": "2",
+    "asset": "LTC",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "LTC/BTC"
+  },
+  {
+    "id": "3",
+    "asset": "NMC",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "NMC/BTC"
+  },
+  {
+    "id": "4",
+    "asset": "DOG",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "DOG/BTC"
+  },
+  {
+    "id": "5",
+    "asset": "PPC",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "PPC/BTC"
+  },
+  {
+    "id": "6",
+    "asset": "FTC",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "FTC/BTC"
+  },
+  {
+    "id": "7",
+    "asset": "XPM",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "XPM/BTC"
+  },
+  {
+    "id": "8",
+    "asset": "ZEC",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "ZEC/BTC"
+  },
+  {
+    "id": "13",
+    "asset": "HYP",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "HYP/BTC"
+  },
+  {
+    "id": "14",
+    "asset": "PND",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "PND/BTC"
+  },
+  {
+    "id": "15",
+    "asset": "XCN",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "XCN/BTC"
+  },
+  {
+    "id": "17",
+    "asset": "XPY",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "XPY/BTC"
+  },
+  {
+    "id": "19",
+    "asset": "QRK",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "QRK/BTC"
+  },
+  {
+    "id": "20",
+    "asset": "ETH",
+    "currency": "BTC",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "ETH/BTC"
+  },
+  {
+    "id": "21",
+    "asset": "ETH",
+    "currency": "THB",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "ETH/THB"
+  },
+  {
+    "id": "22",
+    "asset": "DAS",
+    "currency": "THB",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "DAS/THB"
+  },
+  {
+    "id": "23",
+    "asset": "REP",
+    "currency": "THB",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "REP/THB"
+  },
+  {
+    "id": "24",
+    "asset": "GNO",
+    "currency": "THB",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "GNO/THB"
+  },
+  {
+    "id": "25",
+    "asset": "XRP",
+    "currency": "THB",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "XRP/THB"
+  },
+  {
+    "id": "26",
+    "asset": "OMG",
+    "currency": "THB",
+    "min_size": "0.01",
+    "increment": "0.00000001",
+    "label": "OMG/THB"
+  }
+]
