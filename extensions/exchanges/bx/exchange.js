@@ -75,7 +75,9 @@ module.exports = function container(get, set, clear) {
       }
 
       if (!shownWarning) {
-        console.log('please note: the bx api does not support backtesting (trade/paper only).')
+        console.log('please note: do not be alarmed if you see an error "returned duplicate results"')
+        console.log('please note: the bx api does not support backfilling (trade/paper only).')
+        console.log('please note: make sure to set the --period=1m to make sure data for trade/paper is fetched.')
         shownWarning = true
       }
       client.getRecentTrade(args)
