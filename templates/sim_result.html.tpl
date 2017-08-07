@@ -238,7 +238,7 @@ path.middle, path.zero {
     color: #888;
     font-size: 80px;
     text-align: center;
-} 
+}
 
 .options {
     position: absolute;
@@ -331,6 +331,10 @@ var withData = function (data, trades) {
               if(d.type === 'sell') return y(d.price)-5;
               else return y(d.price);
           });
+
+  var ema = techan.plot.ema()
+    .xScale(x)
+    .yScale(y);
 
   var ema2 = techan.plot.ema()
     .xScale(x)
@@ -435,6 +439,10 @@ var withData = function (data, trades) {
           .attr("clip-path", "url(#ohlcClip)");
 
   ohlcSelection.append("g")
+          .attr("class", "indicator ema ma-1")
+          .attr("clip-path", "url(#ohlcClip)");
+
+  ohlcSelection.append("g")
           .attr("class", "indicator ema ma-2")
           .attr("clip-path", "url(#ohlcClip)");
 
@@ -477,6 +485,7 @@ var withData = function (data, trades) {
     return
   }
   svg.select("g.volume").datum(data)
+  svg.select("g.ema.ma-1").datum(techan.indicator.ema().period({{trend_ema_period}})(data)).call(ema1);
   svg.select("g.ema.ma-2").datum(techan.indicator.ema().period({{trend_ema_period}})(data)).call(ema2);
   svg.select("g.tradearrow").datum(trades).call(tradearrow);
 
@@ -496,7 +505,8 @@ var withData = function (data, trades) {
     svg.select("g.volume").call(volume);
     svg.select("g.crosshair.ohlc").call(ohlcCrosshair).call(zoom);
     svg.select("g.tradearrow").call(tradearrow);
-    svg.select("g .ema.ma-2").call(ema2.refresh).call(zoom);
+    svg.select("g.ema.ma-1").call(ema1.refresh).call(zoom);
+    svg.select("g.ema.ma-2").call(ema2.refresh).call(zoom);
   }
 
   function zoomed() {
