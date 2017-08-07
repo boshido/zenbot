@@ -332,7 +332,7 @@ var withData = function (data, trades) {
               else return y(d.price);
           });
 
-  var ema = techan.plot.ema()
+  var ema1 = techan.plot.ema()
     .xScale(x)
     .yScale(y);
 
@@ -485,8 +485,8 @@ var withData = function (data, trades) {
     return
   }
   svg.select("g.volume").datum(data)
-  svg.select("g.ema.ma-1").datum(techan.indicator.ema().period({{trend_ema_period}})(data)).call(ema1);
-  svg.select("g.ema.ma-2").datum(techan.indicator.ema().period({{trend_ema_period}})(data)).call(ema2);
+  svg.select("g.ema.ma-1").datum(techan.indicator.ema().period({{first_ema_period}})(data)).call(ema1);
+  svg.select("g.ema.ma-2").datum(techan.indicator.ema().period({{second_ema_period}})(data)).call(ema2);
   svg.select("g.tradearrow").datum(trades).call(tradearrow);
 
   // Stash for zooming

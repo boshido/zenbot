@@ -160,6 +160,9 @@ module.exports = function container (get, set, clear) {
           var out = tpl
             .replace('{{code}}', code)
             .replace('{{trend_ema_period}}', so.trend_ema || 36)
+            .replace('{{first_ema_period}}', so.length_first_ema || 3)
+            .replace('{{second_ema_period}}', so.length_second_ema || 6)
+            .replace('{{}}', so.trend_ema || 36)
             .replace('{{output}}', html_output)
             .replace(/\{\{symbol\}\}/g,  so.selector + ' - zenbot ' + require('../package.json').version)
 
