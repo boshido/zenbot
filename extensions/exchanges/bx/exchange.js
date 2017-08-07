@@ -90,9 +90,10 @@ module.exports = function container(get, set, clear) {
       client.getRecentTrade(args)
         .then(function (result) {
           if (!result.success) {
-            return retry('getTrades', func_args, 'Something went wrong to get trade api')
+            return retry('getTrades', func_args, result.error)
           }
           let trades = result.trades.trades
+
           trades = trades.map(function (trade) {
             return {
               trade_id: trade.trade_id,
