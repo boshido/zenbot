@@ -85,6 +85,9 @@ class BXClient {
         if (typeof result === 'string') {
           throw new Error('BX api went down please try again later')
         }
+        if (result.error) {
+          result.error = new Error(result.error)
+        }
         return result
       })
       .catch(function (err) {
@@ -115,6 +118,9 @@ class BXClient {
       .then(function (result) {
         if (typeof result === 'string') {
           throw new Error('BX api went down please try again later')
+        }
+        if (result.error) {
+          result.error = new Error(result.error)
         }
         return result
       })
