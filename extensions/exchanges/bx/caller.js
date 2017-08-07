@@ -130,7 +130,7 @@ class BXClient {
   getTicker () {
     return this.__publicAPICaller('api/')
       .then(function (result) {
-        if (!result.success) {
+        if (typeof result.success === 'undefined') {
           return {
             success: typeof result === 'object',
             trades: result
@@ -146,7 +146,7 @@ class BXClient {
   getParing () {
     return this.__publicAPICaller('api/pairing/')
       .then(function (result) {
-        if (!result.success) {
+        if (typeof result.success === 'undefined') {
           return {
             success: typeof result === 'object',
             trades: result
@@ -175,7 +175,7 @@ class BXClient {
     validator('pairing', params, 'pairing', true)
     return this.__publicAPICaller('api/trade/', params)
       .then(function (result) {
-        if (!result.success) {
+        if (typeof result.success === 'undefined') {
           return {
             success: typeof result === 'object',
             trades: result

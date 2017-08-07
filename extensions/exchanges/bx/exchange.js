@@ -39,7 +39,7 @@ module.exports = function container(get, set, clear) {
     var timeout, errorMsg
     if (error.message.match(/API:Rate limit exceeded/)) {
       timeout = 10000
-    } else if (error.message.match(/Error: BX api went down please try again later/)) {
+    } else if (error.message.match(/BX api went down please try again later/)) {
       timeout = 1500
     } else {
       timeout = 150
@@ -95,7 +95,6 @@ module.exports = function container(get, set, clear) {
             return retry('getTrades', func_args, result.error)
           }
           let trades = result.trades.trades
-
           trades = trades.map(function (trade) {
             return {
               trade_id: trade.trade_id,
