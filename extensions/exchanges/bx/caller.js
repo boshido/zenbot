@@ -81,6 +81,12 @@ class BXClient {
       options.body = params
     }
     return request(options)
+      .then(function (result) {
+        if (typeof result === 'string') {
+          throw new Error('BX api went down please try again later')
+        }
+        return result
+      })
       .catch(function (err) {
         return {
           success: false,
@@ -106,6 +112,12 @@ class BXClient {
       json: true,
       formData: params ? Object.assign(signature, params) : signature
     })
+      .then(function (result) {
+        if (typeof result === 'string') {
+          throw new Error('BX api went down please try again later')
+        }
+        return result
+      })
       .catch(function (err) {
         return {
           success: false,
@@ -119,12 +131,12 @@ class BXClient {
     return this.__publicAPICaller('api/')
       .then(function (result) {
         if (!result.success) {
-          return result
+          return {
+            success: typeof result === 'object',
+            trades: result
+          }
         }
-        return {
-          success: typeof result === 'object',
-          ticker: result
-        }
+        return result
       })
   }
 
@@ -135,12 +147,12 @@ class BXClient {
     return this.__publicAPICaller('api/pairing/')
       .then(function (result) {
         if (!result.success) {
-          return result
+          return {
+            success: typeof result === 'object',
+            trades: result
+          }
         }
-        return {
-          success: typeof result === 'object',
-          pairing: result
-        }
+        return result
       })
   }
 
@@ -164,12 +176,12 @@ class BXClient {
     return this.__publicAPICaller('api/trade/', params)
       .then(function (result) {
         if (!result.success) {
-          return result
+          return {
+            success: typeof result === 'object',
+            trades: result
+          }
         }
-        return {
-          success: typeof result === 'object',
-          trades: result
-        }
+        return result
       })
   }
 

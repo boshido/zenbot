@@ -39,6 +39,8 @@ module.exports = function container(get, set, clear) {
     var timeout, errorMsg
     if (error.message.match(/API:Rate limit exceeded/)) {
       timeout = 10000
+    } else if (error.message.match(/Error: BX api went down please try again later/)) {
+      timeout = 1500
     } else {
       timeout = 150
     }
